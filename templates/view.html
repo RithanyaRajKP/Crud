@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Studentslist</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+</head>
+<body>
+
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+
+    <!--/* Full-width input fields */-->
+    <!--input[type=text], input[type=password] {-->
+    <!--  width: 50%;-->
+    <!--  padding: 15px;-->
+    <!--  margin: 5px 0 22px 0;-->
+    <!--  display: inline-block;-->
+    <!--  border: none;-->
+    <!--  background: #f1f1f1;-->
+    <!--}-->
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for all buttons */
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 30%;
+      opacity: 0.9;
+    }
+
+    button:hover {
+      opacity:1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+      padding: 14px ;
+      background-color: #f44336;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn, .signupbtn {
+      float: center;
+      width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+      padding: 10px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: ; /* Sit on top */
+      margin-left: auto;
+      margin-right: auto;
+      width: 30%;
+      border: 3px solid ;
+      padding: 10px 50px;
+      overflow: auto; /* Enable scroll if needed */
+      background-color:grey;
+
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid ;
+      width: 50%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    /* The Close Button (x) */
+    .close {
+      position: absolute;
+      right: 35px;
+      top: 15px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #f44336;
+      cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+      .cancelbtn, .signupbtn {
+         width:50%;
+      }
+    }
+
+</style>
+
+<body>
+<br>
+<div class="container">
+<div  class="col-2bg ">
+    <nav class="navbar">
+        <hr>
+        <form action="/std/" method="POST">
+            {% csrf_token %}
+        </form>
+   <form action=""method="POST">
+        {% csrf_token %}
+        <input type="radio" value="m" name="gender">Male |
+        <input type="radio" value="f" name="gender">Female
+        <select name="occupation" >
+            <option selected disabled="true">--select option--</option>
+            <option>Karnataka</option>
+            <option>Mumbai</option>
+            <option>Tamil Nadu</option>
+
+        </select>
+
+      <button class="btnbtn-light">Search</button>
+   </form>
+        <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-dark;">ADD</button>
+    </nav>
+</div>
+</div>
+</div>
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
+    <form action="/std/" method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="container">
+            <h1>Add New Record</h1>
+
+            <hr>
+            <div class="form-group">
+                <!--      <label for="f_name"><b></b></label>-->
+                First Name: <input type="text" placeholder="Enter name" name="f_name" required>
+                {{form.f_name}}
+            </div>
+            <div class="form-group">
+                <label for="l_name"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter lastname" name="l_name" required>
+                {{form.l_name}}
+            </div>
+            <div class="form-group">
+                <label for="email"><b>Email</b></label><br>
+                <input type="email" placeholder="Enter mail" name="email" required>
+                {{form.email}}
+            </div>
+            <div class="form-group">
+                <label for="gender"><b>Gender</b></label><br>
+                <input type="text" placeholder="Enter gender" name="gender" required>
+                {{form.gender}}
+            </div>
+            <div class="form-group">
+                <label for="occupation"><b>Occupation</b></label><br>
+                <input type="text" placeholder="Enter occupation" name="occupation" required>
+                {{form.occupation}}
+            </div>
+            <div class="form-group">
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">Cancel
+                    </button>
+                    <button type="submit" class="submit">Add</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+</form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
+<br>
+<div class="container">
+
+    <table class="table table=striped table-bordered table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th>First name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        {% for student in students %}
+        <tr class="bg-light text-dark ">
+            <td>{{student.f_name}}</td>
+            <td>{{student.l_name}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.gender}}</td>
+            <td>{{student.occupation}}</td>
+            <td>
+                <a href="/edit/{{student.id}}"> <span class="btn btn-success">Edit</span></a>
+                <a href="/delete/{{ student.id }}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
